@@ -1,5 +1,6 @@
 package flashlights;
 
-public class Model {
+public class Model 
+{
 
 }
