@@ -88,24 +88,10 @@ public class GUI extends JApplet implements MouseListener, MouseMotionListener
      * @param e
      *         the mouse event
      */
-    public void mouseDragged  (MouseEvent e) 
-    {
-        // Compute how far the mouse moved since the last event.
-        
-        int x = e.getX (); 
-        int y = e.getY ();
-        
-        int deltaX = x - lastX;
-        int deltaY = y - lastY;
-
-        // Save the current mouse position.
-        
-        lastX = x;
-        lastY = y;
-    }
-
+    
     // Unused event methods (required by the interfaces).
 
+    public void mouseDragged  (MouseEvent e) { }
     public void mouseClicked  (MouseEvent e) { }
     public void mouseEntered  (MouseEvent e) { }
     public void mouseExited   (MouseEvent e) { }
