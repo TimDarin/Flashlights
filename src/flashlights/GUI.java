@@ -1,8 +1,10 @@
 package flashlights;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -10,9 +12,7 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.JApplet;
 
 public class GUI extends JApplet implements MouseListener, MouseMotionListener
-{
-    int lastX, lastY;
-	
+{	
     /**
      * Initialize the applet.  Create the shapes, and
      * register this object as a listener to mouse events
@@ -21,9 +21,17 @@ public class GUI extends JApplet implements MouseListener, MouseMotionListener
     public void init ()
     {
         // Register this object as a listener to its own events.
-        
         this.addMouseListener (this);
         this.addMouseMotionListener (this);
+        
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        float newTLCX = dimension.width * 0.5f;
+        float newTLCY = dimension.height * 0.5f;
+        float newWidth = dimension.width * 0.5f;
+        float newHeight = dimension.height * 0.5f;
+        
+        this.resize((int)newWidth, (int)newWidth);
+        this.setLocation((int)newTLCX, (int)newTLCY);
     }
 
     public void paint (Graphics g)
@@ -33,7 +41,6 @@ public class GUI extends JApplet implements MouseListener, MouseMotionListener
         Graphics offscreenGraphics = offscreenBuffer.getGraphics();
 
         // Fill it with a nice color.
-        offscreenGraphics.setColor(new Color (0.2f, 0.8f, 1.0f));
         offscreenGraphics.fillRect(0, 0, this.getWidth(), this.getHeight());
 
         // Draw the offscreen buffer to the screen.
@@ -52,47 +59,17 @@ public class GUI extends JApplet implements MouseListener, MouseMotionListener
      * @param e
      *         the mouse event
      */
-    public void mousePressed  (MouseEvent e) 
+    public void mouseClicked  (MouseEvent e) 
     {
         // Get the location of the mouse click within this window.
         int x = e.getX (); 
         int y = e.getY ();
-
-        // Save it for later use.
-        lastX = x;
-        lastY = y;
     }
-    
-    /**
-     * This method is part of the MouseListener interface.
-     * Because we registered this applet object as a listener
-     * to its own mouse events, this method will be automatically
-     * called whenever the mouse button is let down.
-     * <p>
-     *
-     * @param e
-     *         the mouse event
-     */
-    public void mouseReleased (MouseEvent e) 
-    {
-        
-    }
-    
-    /**
-     * This method is part of the MouseListener interface.
-     * Because we registered this applet object as a listener
-     * to its own mouse events, this method will be automatically
-     * called whenever the mouse is moved with the button pressed down.
-     * <p>
-     *
-     * @param e
-     *         the mouse event
-     */
     
     // Unused event methods (required by the interfaces).
-
+    public void mouseReleased (MouseEvent e) { }
     public void mouseDragged  (MouseEvent e) { }
-    public void mouseClicked  (MouseEvent e) { }
+    public void mousePressed  (MouseEvent e) { }
     public void mouseEntered  (MouseEvent e) { }
     public void mouseExited   (MouseEvent e) { }
     public void mouseMoved    (MouseEvent e) { }
